@@ -1,0 +1,14 @@
+<hibernate-configuration>
+	<session-factory>
+
+		<!--  <property name="hbm2ddl.auto">update</property>-->
+		<property name="dialect">org.hibernate.dialect.MySQL8Dialect</property>
+		<property name="connection.url">jdbc:mysql://localhost:3306/euris?serverTimezone=Europe/Rome</property>
+		<property name="connection.username">root</property>
+		<property name="connection.password">password</property>
+		<property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+
+		<mapping class="it.euris.libreria.data.model.Autori" />
+		<mapping class="it.euris.libreria.data.model.Libri" />
+	</session-factory>
+</hibernate-configuration>

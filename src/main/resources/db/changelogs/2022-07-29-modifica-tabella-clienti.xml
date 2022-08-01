@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+  <changeSet id="2022-07-29-modifica-tabella-clienti-001" author="ale_dav">
+  	<comment>MODIFICA TABELLA CLIENTI</comment>
+  	
+  	<addColumn tableName="clienti">
+  		<column name="provincia_nascita" type="VARCHAR(3)"></column>
+  	</addColumn>
+  	
+  	<rollback>
+  		<dropColumn tableName="clienti" columnName="provincia_nascita" />
+  	</rollback>
+  
+  </changeSet>
+  
+</databaseChangeLog>

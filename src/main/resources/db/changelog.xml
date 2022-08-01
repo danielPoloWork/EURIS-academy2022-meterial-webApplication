@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+  <include file="/db/changelogs/2022-07-29-create-table-clienti.xml"/>
+  <include file="/db/changelogs/2022-07-29-modifica-tabella-clienti.xml"/>
+  <include file="/db/changelogs/2022-08-01-modifica-tabella-libri.xml"/>
+</databaseChangeLog>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+  <changeSet id="2022-07-29-create-table-clienti-001" author="ale_dav">
+  	<comment>CREAZIONE TABELLA CLIENTI</comment>
+  	
+  	<createTable tableName="clienti">
+  		<column name="id" type="BIGINT" autoIncrement="true">
+  			<constraints primaryKey="true" primaryKeyName="pk_clienti" />
+  		</column>
+  		<column name="nome" type="VARCHAR(100)">
+  			<constraints nullable="false" />
+  		</column>
+  		<column name="cognome" type="VARCHAR(100)" />
+  		<column name="codice_fiscale" type="VARCHAR(16)" />
+  		<column name="data_nascita" type="TIMESTAMP" />
+  		<column name="comune_nascita" type="VARCHAR(100)" />
+  	</createTable>
+  	
+  	
+  	<addNotNullConstraint tableName="clienti" columnName="cognome" columnDataType="VARCHAR(100)" />
+  	
+  	<rollback>
+  		<dropTable tableName="clienti"/>
+  	</rollback>
+  
+  </changeSet>
+  
+</databaseChangeLog>
