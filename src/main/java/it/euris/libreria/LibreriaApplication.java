@@ -23,8 +23,10 @@ public class LibreriaApplication {
 		
 		AutoriService autoriService = context.getBean(AutoriService.class);
 		
-		List<Autori> autoriList = autoriService.getAutoriByNomeAndCognome("Alessandro", "Manzoni");
+		Autori a = autoriService.getByIdWithEntityManager(1L);
+		System.out.println("Autore2 trovato: " + a.getId() + " - " + a.getNome() + " " + a.getCognome());
 		
+		List<Autori> autoriList = autoriService.getAutoriByNomeAndCognome("Alessandro", "Manzoni");
 		for(Autori autore : autoriList) {
 			System.out.println("Autore trovato: " + autore.getId() + " - " + autore.getNome() + " " + autore.getCognome());
 		}

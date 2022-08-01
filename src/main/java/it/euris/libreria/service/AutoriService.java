@@ -24,61 +24,66 @@ import it.euris.libreria.data.model.Autori;
 
 @Component
 public class AutoriService {
-	
+
 	@PersistenceContext
 	private EntityManager entityManager;
-		
+
 	public Autori getById(Long id) {
-		
+
 		StandardServiceRegistry ssr = new StandardServiceRegistryBuilder().configure("hibernate.cfg.xml").build();
 		Metadata meta = new MetadataSources(ssr).getMetadataBuilder().build();
-		
+
 		SessionFactory factory = meta.getSessionFactoryBuilder().build();
 		Session session = factory.openSession();
-		
+
 		Autori autore = (Autori) session.get(Autori.class, id);
-		
+
 		factory.close();
 		session.close();
-		
+
 		return autore;
 	}
 
+	public Autori getByIdWithEntityManager(Long id) {
+
+		return entityManager.find(Autori.class, id);
+	}
+
 	public Long save(Autori autore) {
-		
+
 		// HibernateUtil
 		StandardServiceRegistry ssr = new StandardServiceRegistryBuilder().configure("hibernate.cfg.xml").build();
 		Metadata meta = new MetadataSources(ssr).getMetadataBuilder().build();
-		
+
 		SessionFactory factory = meta.getSessionFactoryBuilder().build();
 		Session session = factory.openSession();
-				
+
 		Transaction t = session.beginTransaction();
 
 		Long id = (Long) session.save(autore);
 		t.commit();
 		factory.close();
 		session.close();
-		
+
 		return id;
 	}
-	
+
 	public List<Autori> getAutoriByNomeAndCognome(String nome, String cognome) {
-		
+
 		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
 		CriteriaQuery<Autori> query = cb.createQuery(Autori.class);
 		Root<Autori> rootAutori = query.from(Autori.class);
-		
+
 		Path<String> pathName = rootAutori.get("nome");
 		Path<String> pathCognome = rootAutori.get("cognome");
-		
+
 		List<Predicate> predicates = new ArrayList<>();
 		predicates.add(cb.like(pathName, nome));
 		predicates.add(cb.like(pathCognome, cognome));
-		
-		// WHERE name='Alessandro' AND cognome='Manzoni' 
+
+		// WHERE name='Alessandro' AND cognome='Manzoni'
 		query.select(rootAutori).where(cb.and(predicates.toArray(new Predicate[predicates.size()])));
-		
+
 		return entityManager.createQuery(query).getResultList();
 	}
 
